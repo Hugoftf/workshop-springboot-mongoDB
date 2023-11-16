@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.haga.workshopmongo.domain.User;
+import com.haga.workshopmongo.dto.UserDTO;
 import com.haga.workshopmongo.repository.UserRepository;
 import com.haga.workshopmongo.service.exception.ObjectNotFoundException;
 
@@ -25,4 +26,14 @@ public class UserService {
 		Optional<User> user = userRepository.findById(id);
 		return user.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
 	}
+	
+	public User insert(User obj) {
+		return userRepository.insert(obj);
+	}
+	
+	public User fromDTO(UserDTO objDto) {
+		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
+	}
+	
+	
 }
